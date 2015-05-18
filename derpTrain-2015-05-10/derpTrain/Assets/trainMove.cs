@@ -1,21 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class trainMove : MonoBehaviour {
 	Vector3 direction;
 	float speed;
+	float turn = 7.5f;
+	public static List<Transform> carriageLine = new List<Transform>();
+	private bool spawnBuffer = false;
+	public GameObject carriagePrefab;
+	private float timeBuffered = 0f;
+
 	// Use this for initialization
 	void Start () {
 		direction = Vector3.left;
-		speed = 2;
+		speed = 2f;
 	}
+
+	void spawn(){
+		Camera camera = Camera.main;
+		Vector3 mousePos = camera.ScreenToWorldPoint( Input.mousePosition );
+		mousePos.z = 0;
+		GameObject other = Instantiate (carriagePrefab, mousePos, Quaternion.identity) as GameObject;
+		Transform followTarget = carriageLine.Count == 0 ? transform : carriageLine[carriageLine.Count-1];
+		other.GetComponent<CarriageMove>().move( followTarget, speed, turn );
+		carriageLine.Add(other.transform);
+		spawnBuffer = true;
+		timeBuffered = 0f;
+		
+	}
+
 	
 	// Update is called once per frame
 	void Update () {
 
 
-		GameObject nextTrack =
-			FindNextTrackSegment ();
+		GameObject nextTrack = FindNextTrackSegment ();
 
 
 		print (nextTrack.name);
@@ -27,8 +48,19 @@ public class trainMove : MonoBehaviour {
 		direction.Normalize ();
 		Vector3 target = direction * speed + transform.position;
 		transform.position = Vector3.Lerp (transform.position, target, Time.deltaTime);
-		float facingAngle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg-90;
-		transform.rotation = Quaternion.Euler(0, 0, facingAngle);
+		float facingAngle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler(0, 0, facingAngle), turn*Time.deltaTime);
+
+		//Carriage spawn
+		if (spawnBuffer) {
+			timeBuffered += Time.deltaTime;
+			if (timeBuffered > 0.5f){
+				spawnBuffer = false;
+			}
+		}
+		if (Input.GetButton ("Fire1") && !spawnBuffer) {
+			spawn ();
+		}
 	}
 
 	GameObject FindNextTrackSegment(){

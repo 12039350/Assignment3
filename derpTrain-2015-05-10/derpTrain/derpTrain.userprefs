@@ -1,10 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\enemyCreator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CarriageMove.cs">
     <Files>
-      <File FileName="Assets\trainMove.cs" Line="30" Column="78" />
-      <File FileName="Assets\EnemyMove.cs" Line="56" Column="30" />
-      <File FileName="Assets\enemyCreator.cs" Line="49" Column="23" />
+      <File FileName="Assets\CarriageMove.cs" Line="30" Column="2" />
+      <File FileName="Assets\EnemyMove.cs" Line="34" Column="100" />
+      <File FileName="Assets\trainMove.cs" Line="24" Column="31" />
+      <File FileName="Assets\enemyCreator.cs" Line="6" Column="38" />
+      <File FileName="Assets\Main.cs" Line="32" Column="21" />
+      <File FileName="C:\Users\User\Downloads\New Unity Project\New Unity Project\Assets\Controller.cs" Line="20" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

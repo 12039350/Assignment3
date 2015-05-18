@@ -30,8 +30,8 @@ public class EnemyMove : MonoBehaviour {
 		direction.Normalize ();
 		Vector3 target = direction * speed + transform.position;
 		transform.position = Vector3.Lerp (transform.position, target, Time.deltaTime);
-		float facingAngle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg + 90;
-		transform.rotation = Quaternion.Euler(0, 0, facingAngle);
+		float facingAngle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg - 90;
+		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler(0, 0, facingAngle), 5f*Time.deltaTime);
 	}
 	
 	GameObject FindNextTrackSegment(){

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class enemyCreator : MonoBehaviour {
 
-	public static float waveNumber = 1f;
+	public static float waveNumber = 100f;
 	public static float totalAmount = 0f;
 	public GameObject Enemy1Prefab;
 	public GameObject Enemy2Prefab;
